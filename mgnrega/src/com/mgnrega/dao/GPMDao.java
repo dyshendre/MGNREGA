@@ -8,7 +8,7 @@ import com.mgnrega.model.*;
 public interface GPMDao {
 	public boolean loginAsGpm(String email,String password);
 
-	public String addEmployee(int empId, String empName, String empMobile,String empPass, String empEmail, String empAddress, String empAadhar,
+	public String addEmployee(int empId,String empName, String empEmail, String empPass,  String empMobile,String empAddress, String empAadhar,
 			int empWages, int empTotalDays);
 
 	public Employee viewEmployeeDetail(String empName);

@@ -1,6 +1,7 @@
 package com.mgnrega.usecases;
 
 import java.util.InputMismatchException;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,26 +11,8 @@ import com.mgnrega.model.*;
 
 public class App {
 	public static void main(String[] args) {
-//		Scanner sc=new Scanner(System.in);
-//		System.out.println("Enter email: ");
-//		String name=sc.next();
-//		
-//		System.out.println("Enter password: ");
-//		String password=sc.next();
-//		
-//		BdoDao dao=new BdoDaoImpl();
-//		
-//		try {
-//		 	Bdo bdo= dao.signIn(name, password);
-//			
-//		 	System.out.println("Welcome "+bdo.getName());
-//		 	
-//		 		
-//		 	
-//			}catch (BdoException e) {
-//				System.out.println(e.getMessage());
-//			}
-			
+
+
 		Scanner sc = new Scanner(System.in);
 		try {
 
@@ -38,11 +21,9 @@ public class App {
 			String choice = "";
 
 			System.out.println("-----Welcome to MGNREGA App-------");
-			System.out.println();
-			System.out.println();
 
-			System.out.println("Press 1 for Login as a BDO.");
-			System.out.println("Press 2 for Login as a GPM.");
+			System.out.println("Press 1 for Login as a Block Development Officer(BDO).");
+			System.out.println("Press 2 for Login as a Gram Panchayat Member(GPM).");
 
 			String x = sc.next();
 
@@ -59,6 +40,7 @@ public class App {
 				else 
 				{
 					System.out.println("Incorrect username or password.");
+					
 				}
 			} 
 			else if (x.equals("2")) {
@@ -230,7 +212,7 @@ public class App {
 								System.out.println("Employee name is           : " + em.getEmpEmail());
 								System.out.println("Employee address is        : " + em.getEmpAddress());
 								System.out.println("Employee mobile is         : " + em.getEmpMobile());
-								System.out.println("Total days employee worked : " + em.getEmpTotalDays());
+//								System.out.println("Total days employee worked : " + em.getEmpTotalDays());
 								System.out.println("Employee wages is          : " + em.getEmpWages());
 								System.out.println("<------------------------------------------------------->");
 
@@ -266,26 +248,25 @@ public class App {
 						{
 							try {
 								System.out.println("Enter Employee's Id :");
-								sc.nextLine();
 								int id = sc.nextInt();
 								
-								System.out.println("Enter Employee's Name :");
-								String name = sc.nextLine();
+								System.out.println("Enter Employee Name :");
+								String name = sc.next();
 
 								System.out.println("Enter Employee's email :");
-								String email = sc.nextLine();
+								String email = sc.next();
 								
 								System.out.println("Enter Employee's password :");
-								String pass = sc.nextLine();
+								String pass = sc.next();
 								
 								System.out.println("Enter Employee's Mobile :");
-								String mobile = sc.nextLine();
+								String mobile = sc.next();
 
 								System.out.println("Enter Employee's Address :");
-								String address = sc.nextLine();
+								String address = sc.next();
 
 								System.out.println("Enter Employee's Aadhar no. :");
-								String aadhar = sc.nextLine();
+								String aadhar = sc.next();
 
 								System.out.println("Enter Employee's Daily Wages :");
 								int empwages = sc.nextInt();
@@ -300,7 +281,7 @@ public class App {
 
 							} catch (InputMismatchException e) {
 								System.out.println("<------------------------------------------------------->");
-								System.out.println("-----------------------Invalid choice--------------------");
+								System.out.println("-----------------------Invalid data--------------------");
 								System.out.println("<------------------------------------------------------->");
 								break;
 							}
@@ -326,7 +307,56 @@ public class App {
 							System.out.println("<------------------------------------------------------->");
 
 						}
-			
+						else if (num == 3) {
+							try {
+								System.out.println("Enter the project Id : ");
+								int projid = sc.nextInt();
+
+								System.out.println("Enter the employee Id you want to assign in the above project :");
+								int empid = sc.nextInt();
+								System.out.println("<------------------------------------------------------->");
+								System.out.println(obj2.assignEmployeeToProject(projid, empid));
+								System.out.println("<------------------------------------------------------->");
+
+							} catch (InputMismatchException e) {
+								System.out.println("<------------------------------------------------------->");
+								System.out.println("-----------------------Invalid data--------------------");
+								System.out.println("<------------------------------------------------------->");
+								break;
+							}
+						}
+						 else if (num == 4) {
+								try {
+									System.out.println("Enter Employee ID to View total number of days Employee worked in a project and also their wages");
+									int empId = sc.nextInt();
+
+									List<EmpProject> list4= obj2.viewTotalEmpWorkedInProject(empId);
+//									System.out.println("\n The Employee Id is      : " + list4.get(0).getEmpId());
+//									System.out.println("\n And The Employee Name is: " + list4.get(0).getEmpName());
+//									System.out.println("\n Projects on which '" + list4.get(0).getEmpName()+"' Worked are Shown Below... :) ");
+//									System.out.println("<------------------------------------------------------->");
+									for (EmpProject e : list4) {
+										System.out.println(" The Project Name is                    : " + e.getProjName());
+										System.out.println(" The Total wages are                    : " + e.getEmpWages());
+										System.out.println(" The Total Days the employee worked are : " + e.getEmpTotalDays());
+										System.out.println("<------------------------------------------------------->");
+
+									}
+								} catch (InputMismatchException e) {
+									System.out.println("<------------------------------------------------------->");
+									System.out.println("-----------------------Invalid data--------------------");
+									System.out.println("<------------------------------------------------------->");
+								}
+
+							} else if (num == 0) {
+								System.out.println("<-------\n Thanks for visting..... See You Later... 😊--------->");
+								break;
+							} else {
+								System.out.println("<------------------------------------------------------->");
+								System.out.println("-----------------------Invalid data--------------------");
+								System.out.println("<------------------------------------------------------->");
+							}
+
 				 }//while
 			
 			 }//else if
@@ -336,7 +366,25 @@ public class App {
 			System.out.println("-----------------------Invalid choice--------------------");
 			System.out.println("<------------------------------------------------------->");
 		}
-	
+//		Scanner sc=new Scanner(System.in);
+//		System.out.println("Enter email: ");
+//		String name=sc.next();
+//		
+//		System.out.println("Enter password: ");
+//		String password=sc.next();
+//		
+//		BdoDao dao=new BdoDaoImpl();
+//		
+//		try {
+//		 	Bdo bdo= dao.signIn(name, password);
+//			
+//		 	System.out.println("Welcome "+bdo.getName());
+//		 	
+//		 		
+//		 	
+//			}catch (BdoException e) {
+//				System.out.println(e.getMessage());
+//			}
 		
 	}
 }

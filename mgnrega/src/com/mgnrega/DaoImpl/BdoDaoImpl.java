@@ -23,7 +23,7 @@ public class BdoDaoImpl implements BdoDao{
 
 		try (Connection conn = DBUtil.provideConnection()) {
 
-			PreparedStatement ps = conn.prepareStatement("insert into mgnrega_project values(?,?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("insert into mgnregaProject values(?,?,?,?,?)");
 
 			ps.setInt(1, projId);
 			ps.setString(2, projName);
@@ -151,7 +151,7 @@ public class BdoDaoImpl implements BdoDao{
 
 		try (Connection conn = DBUtil.provideConnection()) {
 			PreparedStatement ps = conn.prepareStatement(
-					"select mp.projName, me.empName,me.empAddress,me.empMobile,me.totalDays,me.empWages  from mgnregaEmployee me inner join mgnregaProject mp inner join mgnregaEmployeeProject mep on mep.projId = mp.projId and mep.empId = me.empId where mp.projName = ?");
+					"select mp.projName, me.empName,me.empAddress,me.empMobile,me.empWages  from mgnregaEmp me inner join mgnregaProject mp inner join mgnregaEmpProject mep on mep.projId = mp.projId and mep.empId = me.empId where mp.projName = ?");
 			ps.setString(1, projName);
 
 			ResultSet rs = ps.executeQuery();
@@ -163,7 +163,7 @@ public class BdoDaoImpl implements BdoDao{
 				epp.setEmpName(rs.getString("empName"));
 				epp.setEmpAddress(rs.getString("empAddress"));
 				epp.setEmpMobile(rs.getString("empMobile"));
-				epp.setEmpTotalDays(rs.getInt("totalDays"));
+//				epp.setEmpTotalDays(rs.getInt("totalDays"));
 				epp.setEmpWages(rs.getInt("empWages"));
 
 				list3.add(epp);
